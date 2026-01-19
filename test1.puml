@@ -1,0 +1,12 @@
+@startuml test
+hide footbox
+
+actor User
+participant AppMobile
+participant EletraSDK
+
+User -> AppMobile : Use AppMobile
+AppMobile -> EletraSDK : Verify Valid license
+
+
+@enduml

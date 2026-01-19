@@ -1,0 +1,58 @@
+@startuml sample
+hide footbox
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    LifeLineBorderColor #34495E
+    LifeLineBackgroundColor #ECF0F1
+}
+
+skinparam boundary {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam control {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam entity {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam participant {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam actor {
+    BackgroundColor #2ECC71
+    BorderColor #27AE60
+    FontColor Black
+}
+
+skinparam database {
+    BackgroundColor #F5CBA7
+    BorderColor #D35400
+}
+
+actor Usuario
+boundary Frontend
+control API
+control AuthService
+entity Licenca
+database Banco
+
+Usuario -> Frontend : solicita licença
+Frontend -> API : GET /licenses/{id}
+API -> AuthService : validar token
+API -> Licenca : carregar dados
+Licenca -> Banco : SELECT
+Banco --> Licenca : dados
+@enduml

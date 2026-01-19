@@ -1,0 +1,68 @@
+@startuml diagramLic
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    LifeLineBorderColor #34495E
+    LifeLineBackgroundColor #ECF0F1
+}
+
+skinparam boundary {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam control {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam entity {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam participant {
+    BackgroundColor #3498DB
+    BorderColor #1F618D
+    FontColor White
+}
+
+skinparam actor {
+    BackgroundColor #2ECC71
+    BorderColor #27AE60
+    FontColor Black
+}
+
+skinparam database {
+    BackgroundColor #F5CBA7
+    BorderColor #D35400
+}
+
+hide footbox
+
+actor User
+participant AppMobile
+participant EletraSDK
+actor Admin
+participant Cerberus
+
+User -> AppMobile : Iniciate the App
+AppMobile -> EletraSDK : Run EletraSDK
+EletraSDK -> EletraSDK : Verify license
+alt Unlicensed user
+    EletraSDK --> AppMobile : Get device token
+    AppMobile --> User : Receive device token
+    User -> Admin : Send device token
+    Admin -> Cerberus : Registrate Device and User
+    Cerberus --> 
+else Licensed user
+    EletraSDK --> AppMobile : Normally
+    AppMobile --> User : Start App
+end
+
+
+
+@enduml
